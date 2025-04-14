@@ -1,6 +1,6 @@
 # SQuat: Subspace-orthogonal KV Cache Quantization
 
-Authors: @haowang94, @phymhan, @xukai92, @akashgit
+Authors: [@haowang94](https://github.com/haowang94), [@phymhan](https://github.com/phymhan), [@xukai92](https://github.com/xukai92), [@akashgit](https://github.com/akashgit)
 
 Implementation of [paper](https://arxiv.org/abs/2503.24358)
 
