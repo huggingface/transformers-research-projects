@@ -201,3 +201,63 @@ python examples/research_projects/rag/finetune_rag.py \
     --passages_path path/to/data/my_knowledge_dataset
     --index_path path/to/my_knowledge_dataset_hnsw_index.faiss
 ```
+
+# Feast RAG Retriever
+
+The Feast RAG retriever provides an alternative retrieval backend using [Feast](https://feast.dev/) as a feature store that can integrate with various vector stores (like Milvus, SQLite, DynamoDB, etc.). This allows you to use Feast's scalable feature serving infrastructure for RAG applications.
+
+## Features
+
+- **Multiple Search Types**: Support for text-only, vector-only, and hybrid search
+- **Flexible Vector Store Integration**: Connect to various vector stores through Feast (Milvus, SQLite, DynamoDB, etc.)
+- **Scalable**: Use Feast's distributed architecture for production deployments
+- **Flexible**: Configure custom feature views and search strategies
+
+## Quick Start
+
+1. **Install Dependencies**:
+   ```bash
+   pip install feast
+   ```
+
+2. **Setup Feast Repository**:
+   Create a Feast repository with a feature view containing your documents:
+   ```python
+   from feast import FeatureStore, FeatureView, Field
+   from feast.types import String, Float32
+   
+   # Define your feature view
+   documents_view = FeatureView(
+       name="documents",
+       entities=[],
+       schema=[
+           Field(name="id", dtype=String),
+           Field(name="text", dtype=String),
+           Field(name="title", dtype=String),
+           Field(name="embedding", dtype=Float32, vector_index=True),
+       ],
+       source=your_source,
+   )
+   ```
+
+3. **Use Feast Retriever**:
+   ```python
+   from feast_retriever import FeastRAGRetriever, FeastIndex
+   
+   retriever = FeastRAGRetriever(
+       feast_repo_path="/path/to/feast/repo",
+       feature_view=documents_view,
+       features=["text", "embedding", "title"],
+       search_type="hybrid",
+       id_field="id",
+       text_field="text",
+       question_encoder_tokenizer=question_encoder_tokenizer,
+       question_encoder=question_encoder,
+       generator_tokenizer=generator_tokenizer,
+       generator_model=generator_model,
+       config=config,
+       index=FeastIndex(),
+   )
+   ```
+
+For more information about Feast and its vector store integrations, see the [Feast documentation](https://docs.feast.dev/).
