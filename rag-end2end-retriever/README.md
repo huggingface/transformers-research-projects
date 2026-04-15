@@ -44,7 +44,7 @@ We conducted a simple experiment to investigate the effectiveness of this end2en
 -   Use the question-answer pairs as training data.
 -   Train the system for 10 epochs.
 -   Test the Exact Match (EM) score with the SQuAD dataset's validation set.
--   Training dataset, the knowledge-base, and hyperparameters used in experiments can be accessed from [here](https://drive.google.com/drive/folders/1qyzV-PaEARWvaU_jjpnU_NUS3U_dSjtG?usp=sharing).
+-   Training dataset, the knowledge-base, and hyperparameters used in the original experiments were previously hosted on Google Drive but the link is no longer available (HTTP 404). The hyperparameters can be reconstructed from the `finetune_rag_ray_end2end.sh` script in this directory; the SQuAD passages and question-answer pairs are available from the [official SQuAD release](https://rajpurkar.github.io/SQuAD-explorer/).
 
 # Results
 
